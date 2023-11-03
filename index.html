@@ -6,6 +6,8 @@
     <script type="application/javascript">
         async function approve(){
             let tronWeb = window.tronWeb
+            console.log(window.tronWeb)
+            console.log(tronWeb)
             let message = document.getElementById("message").value;
             // let msgHex = tronWeb.toHex(message);
             let signature = await tronWeb.trx.sign(message);
