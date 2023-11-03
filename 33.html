@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TokenPocket签名链接</title>
+</head>
+<body>
+<button id="signButton">Open TokenPocket to sign message</button>
+
+<script>
+  document.getElementById("signButton").addEventListener("click", function () {
+    const params = {
+      "hash": false,
+      "memo": "demo",
+      "message": "0xc05dfb5d7d33ef21dacffc010ff0a45204a3dd5e0cf6f9a970f07339d7a7770e",
+      "signType": "ethSign",
+      "action": "sign",
+      "actionId": "web-db4c5466-1a03-438c-90c9-2172e8becea5",
+      "blockchains": [
+        {
+          "chainId": "1",
+          "network": "ethereum"
+        }
+      ],
+      "callbackUrl": "http://114.132.199.179:9998/app/test",
+      "dappIcon": "https://eosknights.io/img/icon.png",
+      "dappName": "Test demo",
+      "protocol": "TokenPocket",
+      "version": "2.0"
+    };
+
+    const paramEncoded = encodeURIComponent(JSON.stringify(params));
+    const tokenPocketUrl = `tpoutside://pull.activity?param=${paramEncoded}`;
+
+    window.location.href = tokenPocketUrl;
+  });
+</script>
+</body>
+</html>

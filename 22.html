@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TokenPocket签名链接</title>
+</head>
+<body>
+<button id="signButton">Open TokenPocket to sign Tron address</button>
+
+<script>
+  document.getElementById("signButton").addEventListener("click", function () {
+    const tronAddress = "TYLuE277r2vxRsUM9XwVoTC5mhnhMrShxj"; // 替换为要签名的Tron地址
+    const tronMessage = tronAddress + " - " + new Date().getTime(); // 要签名的消息
+
+    const params = {
+      "hash": false,
+      "memo": "Sign Tron Address",
+      "message": tronMessage,
+      "signType": "tronSign",
+      "action": "sign",
+      "actionId": "web-12345678-abcdef-90abcdef1234",
+      "blockchains": [
+        {
+          "chainId": "195",
+          "network": "tron"
+        }
+      ],
+      "callbackUrl": "http://your-callback-url.com",
+      "dappIcon": "https://your-dapp-icon-url.com/icon.png",
+      "dappName": "Your DApp Name",
+      "protocol": "TokenPocket",
+      "version": "2.0"
+    };
+
+    const paramEncoded = encodeURIComponent(JSON.stringify(params));
+    const tokenPocketUrl = `tpoutside://pull.activity?param=${paramEncoded}`;
+
+    window.location.href = tokenPocketUrl;
+  });
+</script>
+</body>
+</html>

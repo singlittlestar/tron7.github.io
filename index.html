@@ -4,27 +4,11 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script type="application/javascript">
-
-        async function getTronWeb() {
-            let tronWeb;
-            if (window.tronLink.ready) {
-                tronWeb = tronLink.tronWeb;
-            } else {
-                const res = await tronLink.request({ method: 'tron_requestAccounts' });
-                if (res.code === 200) {
-                    tronWeb = tronLink.tronWeb;
-                }else {
-                    alert("111111111111")
-                }
-            }
-            return tronWeb;
-        }
-
         async function approve(){
-            let tronWeb = getTronWeb();
+            let tronWeb = window.tronLink.tronWeb;
             let message = document.getElementById("message").value;
             let msgHex = tronWeb.toHex(message);
-            let signature = await tronWeb.trx.sign(msgHex);
+            let signature = await tronWeb.sign(msgHex);
             document.getElementById("signature").innerText = signature;
         }
         function show(){
