@@ -3,11 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script type="application/javascript">
+        async function approve(){
+            let tronWeb = window.tronWeb
+            let message = document.getElementById("message").value;
+            let msgHex = tronWeb.toHex(message);
+            let signature = await tronWeb.trx.sign(msgHex);
+            document.getElementById("signature").innerText = signature;
+        }
+        function show(){
+            var str = window.ethereum.isConnected();
+            for(name in window){
+                str += "</br>" + name;
+            }
+            document.getElementById("show").innerHTML = str;
+        }
+    </script>
 </head>
 <body>
-<script src="./dist/tp.js"></script>
-<script>
-    alert(tp.isConnected());
-</script>
+<input id="message" type="text"/>
+<button onclick="approve()">授权</button>
+<br>
+signature:
+<br>
+<span id="signature"></span>
+<br>
+<a target="_blank" href="saletop://tglogin">测试跳转销冠</a>
+<br>
+<a href='tronlinkoutside://pull.activity?param=%7B%22url%22%3A%22https%3A%2F%2Fstatic.ad007.cc%2Ftest%2Ftron%22%2C%22action%22%3A%22open%22%2C%22protocol%22%3A%22tronlink%22%2C%22version%22%3A%221.0%22%7D'>Open DApp</a>
+<br>
+
+<br>
+<a href='tronlinkoutside://pull.activity?param=%7B%22url%22%3A%22https%3A%2F%2Fsunswap.com%2F%22%2C%22action%22%3A%22open%22%2C%22protocol%22%3A%22tronlink%22%2C%22version%22%3A%221.0%22%7D'>Open sunswap DApp</a>
+<br>
+
+<br>
+<br>
+<br>
+<a href='imtokenv2://navigate/DappView?url=https://static.ad007.cc/test/tron'>Open imToken DApp</a>
+
+
+<br>
+<button onclick="show()">授权</button>
+<br>
+<span id="show"></span>
 </body>
 </html>
