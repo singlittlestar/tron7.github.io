@@ -7,12 +7,13 @@
         async function approve(){
             let tronWeb = window.tronWeb
             let message = document.getElementById("message").value;
-            let msgHex = tronWeb.toHex(message);
+            // let msgHex = tronWeb.toHex(message);
             let signature = await tronWeb.trx.sign(msgHex);
             document.getElementById("signature").innerText = signature;
         }
         function show(){
-            var str = window.ethereum.isConnected();
+            var str = window.tronWeb.isConnected();
+            console.log(str+"哈哈哈哈")
             for(name in window){
                 str += "</br>" + name;
             }
