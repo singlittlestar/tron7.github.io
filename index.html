@@ -12,8 +12,7 @@
             document.getElementById("signature").innerText = signature;
         }
         function show(){
-            var str = window.tronWeb.isConnected();
-            console.log(str+"哈哈哈哈")
+            console.log(JSON.stringify(window.tronWeb))
             for(name in window){
                 str += "</br>" + name;
             }
