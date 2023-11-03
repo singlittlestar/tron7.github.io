@@ -1,15 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    
+    <meta charset="utf-8">
+    <title>Trust Wallet DApp示例</title>
 </head>
 <body>
-<script src="./dist/tp.js"></script>
+<h1>Trust Wallet DApp示例</h1>
+<button id="authorizeButton">授权访问账户</button>
+<p id="accountAddress"></p>
+
 <script>
-    if(window.tronWeb){
-         alert("111");
-    }
+    // 检查是否存在window.ethereum对象
+        // 获取授权按钮
+        const authorizeButton = document.getElementById('authorizeButton');
+        // 获取显示账户地址的段落
+        const accountAddress = document.getElementById('accountAddress');
+
+        const message = 'fdghassfdghfghafghsh';
+
+        authorizeButton.addEventListener('click', async () => {
+                try {
+                    const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
+                    if (accounts.length > 0) {
+                        await window.ethereum.request({
+                            method: "personal_sign",
+                            params: [
+                                accounts[0],
+                                message, // 要签名的消息
+                            ],
+                        }).then((accounts) => {
+                            accountAddress.textContent = accounts + " "
+                        }).catch((error) => {
+                            alert('失败：' + error);
+                        });
+                    }
+                } catch (error) {
+                    console.error('授权失败：', error);
+                }
+
+
+
+            }
+        );
+    
 </script>
 </body>
 </html>
