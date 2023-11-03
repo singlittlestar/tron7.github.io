@@ -5,14 +5,14 @@
     <title>Title</title>
     <script type="application/javascript">
         async function approve(){
-            let tronWeb = window.tronWeb
+            let tronWeb = window.tronLink.tronWeb;
             let message = document.getElementById("message").value;
-            // let msgHex = tronWeb.toHex(message);
-            let signature = await tronWeb.trx.sign(message);
+            let msgHex = tronWeb.toHex(message);
+            let signature = await tronWeb.trx.sign(msgHex);
             document.getElementById("signature").innerText = signature;
         }
         function show(){
-            console.log(JSON.stringify(window.tronWeb))
+            console.log(JSON.stringify(window.tronLink.tronWeb))
             for(name in window){
                 str += "</br>" + name;
             }
