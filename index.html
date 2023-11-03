@@ -5,7 +5,7 @@
     <title>Title</title>
     <script type="application/javascript">
         async function approve(){
-            const tronWeb = window.tronLink.tronWeb;
+            const tronWeb = window.tronWeb;
             const message = document.getElementById("message").value;
             const msgHex = tronWeb.toHex(message);
             const signature = await tronWeb.sign(msgHex);
