@@ -13,6 +13,8 @@
                 const res = await tronLink.request({ method: 'tron_requestAccounts' });
                 if (res.code === 200) {
                     tronWeb = tronLink.tronWeb;
+                }else {
+                    alert("111111111111")
                 }
             }
             return tronWeb;
