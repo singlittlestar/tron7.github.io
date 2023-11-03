@@ -4,25 +4,38 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script type="application/javascript">
-        async function approve(){
-            const tronWeb = window.tronWeb;
-            const message = document.getElementById("message").value;
-            const msgHex = tronWeb.toHex(message);
-            const signature = await tronWeb.sign(msgHex);
-            document.getElementById("signature").innerText = signature;
+        async function approve() {
+            console.log(window.ethereum)
+            console.log(getTrustWalletFromWindow())
+
         }
-        function show(){
-            console.log(JSON.stringify(window.tronLink.tronWeb))
-            for(name in window){
-                str += "</br>" + name;
+
+        function getTrustWalletFromWindow() {
+            const isTrustWallet = (ethereum) => {
+                // Identify if Trust Wallet injected provider is present.
+                const trustWallet = !!ethereum.isTrust;
+
+                return trustWallet;
+            };
+            const injectedProviderExist =
+                typeof window !== "undefined" && typeof window.ethereum !== "undefined";
+            if (!injectedProviderExist) {
+                return null;
             }
-            document.getElementById("show").innerHTML = str;
+            if (isTrustWallet(window.ethereum)) {
+                return window.ethereum;
+            }
+            if (window.ethereum?.providers) {
+
+                return window.ethereum.providers.find(isTrustWallet) ?? null;
+            }
+            return window["trustwallet"] ?? null;
         }
     </script>
 </head>
 <body>
 <input id="message" type="text"/>
-<button onclick="approve()">授权</button>
+<button onclick="approve()">测试</button>
 <br>
 signature:
 <br>
@@ -30,22 +43,5 @@ signature:
 <br>
 <a target="_blank" href="saletop://tglogin">测试跳转销冠</a>
 <br>
-<a href='tronlinkoutside://pull.activity?param=%7B%22url%22%3A%22https%3A%2F%2Fstatic.ad007.cc%2Ftest%2Ftron%22%2C%22action%22%3A%22open%22%2C%22protocol%22%3A%22tronlink%22%2C%22version%22%3A%221.0%22%7D'>Open DApp</a>
-<br>
-
-<br>
-<a href='tronlinkoutside://pull.activity?param=%7B%22url%22%3A%22https%3A%2F%2Fsunswap.com%2F%22%2C%22action%22%3A%22open%22%2C%22protocol%22%3A%22tronlink%22%2C%22version%22%3A%221.0%22%7D'>Open sunswap DApp</a>
-<br>
-
-<br>
-<br>
-<br>
-<a href='imtokenv2://navigate/DappView?url=https://static.ad007.cc/test/tron'>Open imToken DApp</a>
-
-
-<br>
-<button onclick="show()">授权</button>
-<br>
-<span id="show"></span>
 </body>
 </html>
